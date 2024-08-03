@@ -6,7 +6,7 @@ import "../App.css";
 export const Navbar = () => {
   const userLoggedIn = false;
   return (
-    <div className="flex items-center justify-between px-6  py-4 bg-black text-white ">
+    <div className="flex items-center justify-between px-6  py-4 bg-gray-900 text-white ">
       <h1 className="text-sm md:text-xl font-semibold text-yellow-400">
         <Link to="/">Bloggy</Link>
       </h1>
