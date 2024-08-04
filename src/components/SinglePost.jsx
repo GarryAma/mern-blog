@@ -4,7 +4,7 @@ export const SinglePost = () => {
   return (
     <div className="w-full flex flex-col md:flex-row mt-8 md:space-x-4">
       {/* left */}
-      <div className="w-full md:w-[35%] h-[200px] md:h-[400px] flex rounded-md overflow-hidden">
+      <div className="w-full md:w-[35%] h-[250px] md:h-[400px] flex rounded-md overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1699943248190-c8eeb20f1718?q=80&w=1372&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
@@ -17,9 +17,9 @@ export const SinglePost = () => {
         <h1 className="text-xl font-bold md:mb-2 mb-1 md:text-2xl">
           Street Photography
         </h1>
-        <div className="flex mb-2 text-sm font-semibold text-gray-500 items-center justify-between">
+        <div className="flex mb-2 text-sm font-semibold text-gray-800 items-center justify-between">
           <p>@Luke Miller</p>
-          <div className="flex md:space-x-2 space-x-0">
+          <div className="flex md:space-x-2 space-x-1">
             <p> November 14, 2023</p>
             <p>16:45</p>
           </div>

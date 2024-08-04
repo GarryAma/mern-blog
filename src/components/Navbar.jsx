@@ -16,11 +16,11 @@ export const Navbar = () => {
         </p>
         <input
           type="text"
-          className="outline-none px-2  w-[150px] border border-black-100 text-gray-800 rounded-lg text-sm"
+          className="outline-none px-2  w-[150px] border border-black-100 text-gray-800 rounded-lg text-sm md:text-lg md:w-[200px]"
           placeholder="Search a post..."
         />
       </div>
-      <div className="flex items-center text-sm md:text-lg justify-center space-x-2 md:space-x-6">
+      <div className="flex items-center text-xs md:text-lg justify-center space-x-2 md:space-x-6">
         {userLoggedIn ? (
           <>
             <h3>
