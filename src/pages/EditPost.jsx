@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { ImCross } from "react-icons/im";
 
-export const CreatePost = () => {
+export const EditPost = () => {
   const [cat, setCat] = useState("");
   const [catsArr, setCatArr] = useState([]);
 
@@ -20,13 +20,13 @@ export const CreatePost = () => {
     setCatArr(filtered);
   };
 
-  console.log(catsArr);
+  //   console.log(catsArr);
   return (
     <div>
       <Navbar />
       <div className="px-6 md:px-[200px] mt-8">
         <h1 className="font-semibold md:text-2xl text-xl mt-8">
-          Create a post
+          Update a post
         </h1>
         <form className="w-full flex flex-col space-y-4 md:space-y-6 my-8">
           <input
@@ -83,7 +83,7 @@ export const CreatePost = () => {
             placeholder="Write post description"
           />
           <button className="bg-gray-900 w-full text-white rounded-md">
-            Create
+            Update
           </button>
         </form>
       </div>

@@ -1,9 +1,7 @@
-import React from "react";
-
 export const Footer = () => {
   return (
     <>
-      <div className="mt-8 w-full bg-gray-900 px-8 flex justify-between text-xs md:text-md py-8">
+      <div className="mt-8 w-full bg-gray-900 px-8 flex justify-between text-xs md:text-md py-8 ">
         <div className="flex flex-col text-white space-y-2">
           <p>Featured Blogs</p>
           <p>Most Viewed</p>

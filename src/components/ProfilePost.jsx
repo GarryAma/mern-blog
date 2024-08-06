@@ -1,4 +1,4 @@
-export const SinglePost = () => {
+export const ProfilePost = () => {
   return (
     <div className="w-full flex flex-col md:flex-row mt-8 md:space-x-4">
       {/* left */}
@@ -11,7 +11,7 @@ export const SinglePost = () => {
       </div>
 
       {/* right */}
-      <div className="flex flex-col w-full md:w-[65%] lg:justify-evenly space-y-4">
+      <div className="flex flex-col w-full md:w-[65%]  space-y-4">
         <h1 className="text-xl font-bold md:mb-2 mb-1 md:text-2xl">
           Street Photography
         </h1>
@@ -22,7 +22,7 @@ export const SinglePost = () => {
             <p>16:45</p>
           </div>
         </div>
-        <p className="text-sm md:text-lg">
+        <p className="text-xs md:text-sm">
           This stunning photograph captures the tranquil beauty of a sunrise
           over a serene landscape. The scene features a picturesque horizon with
           soft, pastel-colored skies transitioning from night to day. A gentle

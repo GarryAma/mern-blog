@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import "../App.css";
@@ -16,7 +15,7 @@ export const Navbar = () => {
         </p>
         <input
           type="text"
-          className="outline-none px-2  w-[150px] border border-black-100 text-gray-800 rounded-lg text-sm md:text-lg md:w-[200px]"
+          className="outline-none px-2 py-1  w-[150px] border border-black-100 text-gray-800 rounded-lg text-xs md:text-sm md:w-[200px]"
           placeholder="Search a post..."
         />
       </div>
