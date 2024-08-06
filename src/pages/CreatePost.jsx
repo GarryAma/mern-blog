@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { ImCross } from "react-icons/im";
@@ -43,14 +43,14 @@ export const CreatePost = () => {
             <div className="flex items-center space-x-4 md:space-x-8">
               <input
                 type="text"
-                className="px-4 py-2 outline-none border border-gray-200 rounded-sm"
+                className="px-2 py-1 outline-none border border-gray-200 rounded-sm text-xs md:text-sm"
                 placeholder="Enter post category"
                 value={cat}
                 onChange={(e) => setCat(e.target.value)}
               />
               <button
                 onClick={addCategory}
-                className="bg-gray-900 rounded-md text-white px-4 py-2 font-semibold cursor-pointer"
+                className="bg-gray-900 rounded-md text-white px-3 py-1  cursor-pointer text-xs md:text-sm"
               >
                 Add
               </button>
@@ -82,7 +82,7 @@ export const CreatePost = () => {
             className="p-2 outline-none border border-gray-400"
             placeholder="Write post description"
           />
-          <button className="bg-gray-900 w-full text-white rounded-md">
+          <button className="bg-gray-900 w-full text-white rounded-md md:p-2 ">
             Create
           </button>
         </form>

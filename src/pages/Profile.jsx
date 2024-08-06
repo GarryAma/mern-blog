@@ -37,10 +37,10 @@ export const Profile = () => {
             className="outline-none p-2 border border-gray-400 rounded-md text-xs md:text-sm mt-2"
           />
           <div className="flex items-center space-x-4 mt-2">
-            <button className="font-semibold p-1 border border-gray-400 text-xs md:text-sm rounded-md bg-gray-900 text-white">
+            <button className="py-1 px-3 border border-gray-400 text-xs md:text-sm rounded-md bg-gray-900 text-white">
               update
             </button>
-            <button className="font-semibold p-1 border border-gray-400 text-xs md:text-sm rounded-md bg-gray-900 text-white">
+            <button className="py-1 px-3 border border-gray-400 text-xs md:text-sm rounded-md bg-gray-900 text-white">
               delete
             </button>
           </div>

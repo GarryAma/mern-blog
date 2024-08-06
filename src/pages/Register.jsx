@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "../components/Footer";
 
@@ -15,7 +15,7 @@ export const Register = () => {
           <Link to="/login">Login</Link>
         </h3>
       </div>
-      <div className="w-full h-[70.5vh] md:h-[74vh] flex justify-center items-center">
+      <div className="w-full md:w-[60%] h-[70.5vh] md:h-[74vh] flex justify-center items-center md:mx-auto">
         <div className=" w-[75%] p-2">
           <div className="py-5 flex flex-col">
             <h1 className="font-semibold text-3xl">Create your account</h1>
