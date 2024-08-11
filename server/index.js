@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
-import { router } from "./routes/authController.js";
+import { router } from "./routes/authRoute.js";
 
 const app = express();
 const PORT = 8080;
