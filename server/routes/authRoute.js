@@ -1,11 +1,9 @@
 import express from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import {
   createUser,
   loginUser,
   logoutUser,
-} from "../controllers/userController.js";
+} from "../controllers/authController.js";
 
 export const router = express.Router();
 
