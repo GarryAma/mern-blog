@@ -5,15 +5,13 @@ import {
   logoutUser,
 } from "../controllers/authController.js";
 
-export const router = express.Router();
+export const authRouter = express.Router();
 
 //REGISTER
-router.post("/register", createUser);
-
-// router.post("/login")
+authRouter.post("/register", createUser);
 
 //LOGIN
-router.post("/login", loginUser);
+authRouter.post("/login", loginUser);
 
 //LOGOUT
-router.get("/logout", logoutUser);
+authRouter.get("/logout", logoutUser);

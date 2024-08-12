@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
-import { router } from "./routes/authRoute.js";
+import { authRouter } from "./routes/authRoute.js";
+import { userRouter } from "./routes/userRoute.js";
 
 const app = express();
 const PORT = 8080;
@@ -20,7 +21,8 @@ const connectDB = async () => {
 
 const startServer = async () => {
   await connectDB();
-  app.use("/api/auth", router);
+  app.use("/api/auth", authRouter);
+  app.use("/api", userRouter);
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
