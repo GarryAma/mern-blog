@@ -37,7 +37,6 @@ export const updateUser = async (request, response) => {
 };
 
 //DELETE
-
 export const deleteUser = async (request, response) => {
   try {
     const { id } = request.params;
@@ -66,6 +65,7 @@ export const getAllUsers = async (request, response) => {
   }
 };
 
+//GET USER BY ID
 export const getuserById = async (request, response) => {
   const { id } = request.params;
   try {
