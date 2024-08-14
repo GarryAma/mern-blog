@@ -2,6 +2,7 @@ import express from "express";
 import {
   createComment,
   deleteComment,
+  getAllCommentsForEachPost,
   updateComment,
 } from "../controllers/commentController.js";
 
@@ -17,4 +18,4 @@ commentRouter.put("/:id", updateComment);
 commentRouter.delete("/:id", deleteComment);
 
 //get all the comments for each post
-commentRouter.get("/post/:postId");
+commentRouter.get("/post/:postId", getAllCommentsForEachPost);

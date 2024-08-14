@@ -69,7 +69,10 @@ export const getPostById = async (request, response) => {
 //get all post
 export const getAllPosts = async (request, response) => {
   try {
-    const posts = await Post.find({});
+    const searchQuery = request.query.search || "";
+    // console.log(query);
+    const searchFilter = { title: { $regex: searchQuery, $options: "i" } };
+    const posts = await Post.find(searchFilter);
 
     response
       .status(200)
@@ -94,3 +97,13 @@ export const getUserPost = async (request, response) => {
     response.json({ message: error.message }).status(500);
   }
 };
+
+//search post
+// export const searchPosts = async (request, response) => {
+//   const { keyword } = request.params;
+//   try {
+//   } catch (error) {
+//     console.log(error.message);
+//     response.status(500).json(error.message);
+//   }
+// };

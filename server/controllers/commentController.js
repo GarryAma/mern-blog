@@ -52,3 +52,19 @@ export const deleteComment = async (request, response) => {
 };
 
 //get all the comments for each post
+export const getAllCommentsForEachPost = async (request, response) => {
+  try {
+    const allCommentsForEachPost = await Comment.find({
+      postId: request.params.postId,
+    });
+    response
+      .status(200)
+      .json({
+        message: "Comments have been retrieved",
+        allCommentsForEachPost,
+      });
+  } catch (error) {
+    console.log(error.message);
+    response.status(500).json(error.message);
+  }
+};

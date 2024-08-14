@@ -27,3 +27,6 @@ postRoute.get("/", getAllPosts);
 
 //get user post
 postRoute.get("/user/:userId", getUserPost);
+
+//search post
+// postRoute.get("/search/:keyword", searchPosts);
