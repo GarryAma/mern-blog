@@ -10,7 +10,7 @@ export const updateUser = async (request, response) => {
     const userId = request.params.id;
     const updatedFields = {};
 
-    console.log(userId);
+    // console.log(userId);
 
     if (username) updatedFields.username = username;
 

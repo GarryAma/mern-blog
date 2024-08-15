@@ -7,17 +7,19 @@ import {
   getUserPost,
   updatePost,
 } from "../controllers/postController.js";
+import { verifyToken } from "../verifiedToken.js";
+import { userAuth } from "../userAuth.js";
 
 export const postRoute = express.Router();
 
 //create post
-postRoute.post("/create", createPost);
+postRoute.post("/create", verifyToken, userAuth, createPost);
 
 //update post
-postRoute.put("/:id", updatePost);
+postRoute.put("/:id", verifyToken, userAuth, updatePost);
 
 //delete post
-postRoute.delete("/:id", deletePost);
+postRoute.delete("/:id", verifyToken, userAuth, deletePost);
 
 //get post by id
 postRoute.get("/:id", getPostById);

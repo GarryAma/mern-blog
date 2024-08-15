@@ -19,7 +19,7 @@ export const Navbar = () => {
           placeholder="Search a post..."
         />
       </div>
-      <div className="flex items-center text-xs font-light md:text-sm justify-center space-x-2 md:space-x-6">
+      <div className="flex items-center text-xs font-light  justify-center space-x-2 md:text-sm md:space-x-6">
         {userLoggedIn ? (
           <>
             <h3>

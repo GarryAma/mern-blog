@@ -5,17 +5,19 @@ import {
   getAllCommentsForEachPost,
   updateComment,
 } from "../controllers/commentController.js";
+import { verifyToken } from "../verifiedToken.js";
+import { userAuth } from "../userAuth.js";
 
 export const commentRouter = express.Router();
 
 //create comment
-commentRouter.post("/create", createComment);
+commentRouter.post("/create", verifyToken, userAuth, createComment);
 
 //update comment
-commentRouter.put("/:id", updateComment);
+commentRouter.put("/:id", verifyToken, userAuth, updateComment);
 
 //delete comment
-commentRouter.delete("/:id", deleteComment);
+commentRouter.delete("/:id", verifyToken, userAuth, deleteComment);
 
 //get all the comments for each post
 commentRouter.get("/post/:postId", getAllCommentsForEachPost);
