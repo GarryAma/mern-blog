@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import { FaBarsStaggered } from "react-icons/fa6";
+
 import "../App.css";
+import { MenuBar } from "./MenuBar";
 
 export const Navbar = () => {
   const userLoggedIn = false;
@@ -19,7 +22,7 @@ export const Navbar = () => {
           placeholder="Search a post..."
         />
       </div>
-      <div className="flex items-center text-xs font-light  justify-center space-x-2 md:text-sm md:space-x-6">
+      <div className="hidden md:flex items-center text-xs font-light  justify-center space-x-2 md:text-sm md:space-x-6">
         {userLoggedIn ? (
           <>
             <h3>
@@ -40,6 +43,12 @@ export const Navbar = () => {
           </>
         )}
       </div>
+      <div className="md:hidden text-xl">
+        <span>
+          <FaBarsStaggered />
+        </span>
+      </div>
+      <MenuBar />
     </div>
   );
 };
