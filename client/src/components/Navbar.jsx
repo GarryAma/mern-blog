@@ -1,14 +1,23 @@
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import { FaBarsStaggered } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
+import { HiBars3 } from "react-icons/hi2";
 
 import "../App.css";
 import { MenuBar } from "./MenuBar";
+import { useState } from "react";
 
 export const Navbar = () => {
-  const userLoggedIn = false;
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
+  const [bar, setBar] = useState(true);
+
+  const showMenuHandler = () => {
+    setShowMenu((current) => !current);
+  };
+
   return (
-    <div className="flex items-center justify-between px-6  py-4 bg-gray-900 text-white ">
+    <div className="relative flex items-center justify-between px-6  py-4 bg-gray-900 text-white ">
       <h1 className="text-sm md:text-xl font-semibold text-yellow-400">
         <Link to="/">Bloggy</Link>
       </h1>
@@ -22,15 +31,21 @@ export const Navbar = () => {
           placeholder="Search a post..."
         />
       </div>
-      <div className="hidden md:flex items-center text-xs font-light  justify-center space-x-2 md:text-sm md:space-x-6">
+      <div
+        className="hidden md:flex items-center text-xs font-light  justify-center space-x-2 md:text-sm md:space-x-6"
+        onClick={showMenuHandler}
+      >
         {userLoggedIn ? (
           <>
             <h3>
               <Link to="/write">Create</Link>
             </h3>
-            <h3>
-              <Link to="/profile">Profile</Link>
-            </h3>
+            <span
+              className="cursor-pointer text-xl"
+              onClick={() => setBar((current) => !current)}
+            >
+              {bar ? <HiBars3 /> : <IoClose />}
+            </span>
           </>
         ) : (
           <>
@@ -43,12 +58,15 @@ export const Navbar = () => {
           </>
         )}
       </div>
-      <div className="md:hidden text-xl">
-        <span>
-          <FaBarsStaggered />
+      <div className="md:hidden text-xl" onClick={showMenuHandler}>
+        <span
+          className="cursor-pointer "
+          onClick={() => setBar((current) => !current)}
+        >
+          {bar ? <HiBars3 /> : <IoClose />}
         </span>
       </div>
-      <MenuBar />
+      <MenuBar showMenu={showMenu} userLoggedIn={userLoggedIn} />
     </div>
   );
 };
