@@ -1,9 +1,33 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "../components/Footer";
+import { useForm } from "react-hook-form";
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  //REACT-HOOK-FORM
+  // const form = useForm({
+  //   defaultValues: {
+  //     username: "",
+  //     email: "",
+  //     password: "",
+  //   },
+  // });
+  // console.log(form);
+  const form = useForm();
+  // console.log(form);
+  const userNameValue = form.watch("username") || "";
+  // console.log(userNameValue);
+  const emailValue = form.watch("email") || "";
+  const passwordValue = form.watch("password") || "";
+  // console.log(form.formState.errors);
+
+  const handleSubmitForm = (values) => {
+    console.log(values);
+  };
+
+  const onError = (errors) => console.log(errors);
 
   return (
     <>
@@ -21,7 +45,10 @@ export const Register = () => {
             <h1 className="font-semibold text-3xl">Create your account</h1>
             <h2 className="text-sm font-light">Personalize Your Experience</h2>
           </div>
-          <form className="flex flex-col  space-y-4 w-[95%] mx-auto">
+          <form
+            className="flex flex-col  space-y-4 w-[95%] mx-auto"
+            onSubmit={form.handleSubmit(handleSubmitForm, onError)}
+          >
             <div>
               <label htmlFor="username" className="text-sm">
                 Username :
@@ -30,7 +57,23 @@ export const Register = () => {
                 type="text"
                 placeholder="Enter username"
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                name="username"
+                {...form.register("username", {
+                  required: "username is required",
+                })}
               />
+              <ul
+                className={`text-xs ${
+                  userNameValue?.length >= 3 ? "text-green-800" : "text-red-600"
+                }`}
+              >
+                <li>· Username at least 3 characters or more</li>
+              </ul>
+              {/* {form.formState.errors && (
+                <p className="text-red-600">
+                  {form.formState.errors.username?.message}
+                </p>
+              )} */}
             </div>
 
             <div>
@@ -38,10 +81,21 @@ export const Register = () => {
                 Email :
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder="Enter email"
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                name="email"
+                {...form.register("email", { required: "email is required" })}
               />
+              <ul
+                className={`text-xs ${
+                  emailValue.includes("@") && emailValue.includes(".com")
+                    ? "text-green-800"
+                    : "text-red-600"
+                }`}
+              >
+                <li>· Email must be valid</li>
+              </ul>
             </div>
 
             <div>
@@ -53,9 +107,24 @@ export const Register = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                name="password"
+                {...form.register("password", {
+                  required: "password is required",
+                  minLength: {
+                    value: 8,
+                    message: "password at least 8 characters or more",
+                  },
+                })}
               />
+              <ul
+                className={`text-xs ${
+                  passwordValue.length >= 8 ? "text-green-800" : "text-red-600"
+                }`}
+              >
+                <li>· Password at least 8 characters or more</li>
+              </ul>
 
-              <div className="flex mt-1 space-x-1">
+              <div className="flex mt-2 space-x-1">
                 <label htmlFor="showPassword" className="text-xs">
                   Show Password
                 </label>
