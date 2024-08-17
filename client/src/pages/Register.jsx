@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { url } from "../url";
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,8 +25,15 @@ export const Register = () => {
   const passwordValue = form.watch("password") || "";
   // console.log(form.formState.errors);
 
-  const handleSubmitForm = (values) => {
+  const handleSubmitForm = async (values) => {
     console.log(values);
+
+    try {
+      const response = await axios.post(`${url}/api/auth/register`, values);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onError = (errors) => console.log(errors);
@@ -64,13 +73,15 @@ export const Register = () => {
               />
               <ul
                 className={`text-xs ${
-                  userNameValue?.length >= 3 ? "text-green-800" : "text-red-600"
+                  userNameValue?.length >= 3
+                    ? "text-green-800"
+                    : "text-gray-600"
                 }`}
               >
                 <li>· Username at least 3 characters or more</li>
               </ul>
               {/* {form.formState.errors && (
-                <p className="text-red-600">
+                <p className="text-gray-600">
                   {form.formState.errors.username?.message}
                 </p>
               )} */}
@@ -91,7 +102,7 @@ export const Register = () => {
                 className={`text-xs ${
                   emailValue.includes("@") && emailValue.includes(".com")
                     ? "text-green-800"
-                    : "text-red-600"
+                    : "text-gray-600"
                 }`}
               >
                 <li>· Email must be valid</li>
@@ -118,7 +129,7 @@ export const Register = () => {
               />
               <ul
                 className={`text-xs ${
-                  passwordValue.length >= 8 ? "text-green-800" : "text-red-600"
+                  passwordValue.length >= 8 ? "text-green-800" : "text-gray-600"
                 }`}
               >
                 <li>· Password at least 8 characters or more</li>
