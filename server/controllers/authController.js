@@ -14,15 +14,19 @@ export const createUser = async (request, response) => {
       password: hashedPassword,
     });
 
-    response
-      .json({
-        message: "User created",
-        queryResult,
-      })
-      .status(200);
+    response.status(200).json({
+      message: "User created",
+      queryResult,
+    });
   } catch (error) {
     console.log(error);
-    response.json({ error }).status(500);
+    response
+      .status(500)
+      .json({
+        error,
+        message:
+          "Oops! It looks like this email is already in use. If you already have an account, please log in. Otherwise, try registering with a different email address.",
+      });
   }
 };
 

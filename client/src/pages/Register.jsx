@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -7,6 +7,9 @@ import { url } from "../url";
 
 export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
   //REACT-HOOK-FORM
   // const form = useForm({
@@ -20,7 +23,6 @@ export const Register = () => {
   const form = useForm();
   // console.log(form);
   const userNameValue = form.watch("username") || "";
-  // console.log(userNameValue);
   const emailValue = form.watch("email") || "";
   const passwordValue = form.watch("password") || "";
   // console.log(form.formState.errors);
@@ -29,10 +31,14 @@ export const Register = () => {
     console.log(values);
 
     try {
+      setErrorMessage(null);
       const response = await axios.post(`${url}/api/auth/register`, values);
-      console.log(response);
+      setUserData(response.data);
+      form.reset();
+      navigate("/login");
     } catch (error) {
-      console.log(error);
+      // console.log(error.response.data.message);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -145,6 +151,9 @@ export const Register = () => {
                   onChange={() => setShowPassword((current) => !current)}
                 />
               </div>
+              {errorMessage && (
+                <p className="text-xs mt-4 text-red-600">{errorMessage}</p>
+              )}
             </div>
 
             <button className="p-2 rounded-md bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200">
