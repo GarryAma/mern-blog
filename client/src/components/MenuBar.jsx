@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../useContext/UserContext";
 
-export const MenuBar = ({ showMenu, userLoggedIn }) => {
+export const MenuBar = ({ showMenu }) => {
+  const { user, handleLogout } = useContext(UserContext);
   return (
     <div
       className={`bg-gray-900  w-[300px] md:w-[450px] flex flex-col items-start absolute top-[65px] space-y-8 p-4 transition-all duration-200 opacity-95   ${
@@ -9,7 +11,7 @@ export const MenuBar = ({ showMenu, userLoggedIn }) => {
           : "right-[-300px] md:right-[-450px] opacity-0"
       }`}
     >
-      {userLoggedIn ? (
+      {Object.keys(user).length > 0 ? (
         <>
           <h3 className="text-white text-sm hover:text-orange-500 cursor-pointer ">
             Write
@@ -20,7 +22,10 @@ export const MenuBar = ({ showMenu, userLoggedIn }) => {
           <h3 className="text-white text-sm hover:text-orange-500 cursor-pointer">
             My Blogs
           </h3>
-          <h3 className="text-white text-sm hover:text-orange-500 cursor-pointer">
+          <h3
+            className="text-white text-sm hover:text-orange-500 cursor-pointer"
+            onClick={handleLogout}
+          >
             Logout
           </h3>
         </>

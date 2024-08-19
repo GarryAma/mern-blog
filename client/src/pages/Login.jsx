@@ -1,10 +1,37 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 // import { FaEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Footer } from "../components/Footer";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { url } from "../url";
+import { UserContext } from "../useContext/UserContext";
+import { CiVolumeHigh } from "react-icons/ci";
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const form = useForm();
+  // console.log(form);
+  // const result = form.register("name", { required: true });
+  // console.log(result);
+
+  const result = useContext(UserContext);
+  // console.log(result.user);
+
+  const handleLogin = async (values) => {
+    try {
+      const response = await axios.post(`${url}/api/auth/login`, values, {
+        withCredentials: true,
+      });
+      // console.log(response.data);
+      result.handleSetUserAfterLogin(response.data);
+      console.log(response.data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -22,7 +49,10 @@ export const Login = () => {
             <h1 className="font-semibold text-3xl">Welcome back...</h1>
             <h2 className="text-sm font-light">Sign in to continue</h2>
           </div>
-          <form className="flex flex-col  space-y-4 w-[95%] mx-auto">
+          <form
+            className="flex flex-col  space-y-4 w-[95%] mx-auto"
+            onSubmit={form.handleSubmit(handleLogin)}
+          >
             <div>
               <label htmlFor="username" className="text-sm">
                 Email :
@@ -31,6 +61,8 @@ export const Login = () => {
                 type="text"
                 placeholder="Enter email"
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                name="email"
+                {...form.register("email", { required: true })}
               />
             </div>
 
@@ -43,6 +75,8 @@ export const Login = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                name="passwor"
+                {...form.register("password", { required: true })}
               />
 
               <div className="flex mt-1 space-x-1">

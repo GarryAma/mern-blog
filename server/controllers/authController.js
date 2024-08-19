@@ -20,13 +20,11 @@ export const createUser = async (request, response) => {
     });
   } catch (error) {
     console.log(error);
-    response
-      .status(500)
-      .json({
-        error,
-        message:
-          "Oops! It looks like this email is already in use. If you already have an account, please log in. Otherwise, try registering with a different email address.",
-      });
+    response.status(500).json({
+      error,
+      message:
+        "Oops! It looks like this email is already in use. If you already have an account, please log in. Otherwise, try registering with a different email address.",
+    });
   }
 };
 
@@ -35,19 +33,27 @@ export const loginUser = async (request, response) => {
 
   try {
     const queryResult = await User.findOne({ email });
-
+    console.log(queryResult);
     if (!queryResult)
-      return response.json({ message: "User not found" }).status(404);
+      return response.status(404).json({ message: "User not found" });
 
     const isMatched = await bcrypt.compare(password, queryResult.password);
     if (!isMatched)
-      return response.json({ message: "Invalid credentials!" }).status(401);
+      return response.status(401).json({ message: "Invalid credentials!" });
 
     // console.log(queryResult);
-    const token = jwt.sign({ id: queryResult._id }, process.env.SECRET, {
-      expiresIn: "3d",
-    });
-
+    const token = jwt.sign(
+      {
+        id: queryResult._id,
+        username: queryResult.username,
+        email: queryResult.email,
+      },
+      process.env.SECRET,
+      {
+        expiresIn: "3d",
+      }
+    );
+    console.log(`token dari login : ${token}`);
     const { password: pass, ...rest } = queryResult._doc;
     response.cookie("token", token).status(200).json(rest);
     // console.log(pass);
@@ -59,7 +65,7 @@ export const loginUser = async (request, response) => {
     // response.json(queryResult);
   } catch (error) {
     console.log(error.message);
-    response.json({ message: error.message }).status(500);
+    response.status(500).json({ message: error.message });
   }
 };
 
@@ -77,6 +83,24 @@ export const logoutUser = async (request, response) => {
     console.log(error.message);
     response.status(500).json({ message: error.message });
   }
+};
+
+//refetch when refresh, using token
+export const refetch = (request, response) => {
+  const token = request.cookies.token;
+  if (!token) {
+    console.log("there is no token");
+    return response.status(401).json({ message: "you are unauthorized" });
+  }
+  console.log("Token dari refetch:", token);
+  jwt.verify(token, process.env.SECRET, {}, (error, data) => {
+    if (error) {
+      return response.status(404).json({ error });
+    }
+
+    console.log(data);
+    response.status(200).json(data);
+  });
 };
 
 // NOTES

@@ -1,16 +1,22 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { HiBars3 } from "react-icons/hi2";
 
 import "../App.css";
 import { MenuBar } from "./MenuBar";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../useContext/UserContext";
+import { url } from "../url";
+import axios from "axios";
 
 export const Navbar = () => {
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
+  // const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const [bar, setBar] = useState(true);
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+  console.log(user);
 
   const showMenuHandler = () => {
     setShowMenu((current) => !current);
@@ -35,10 +41,10 @@ export const Navbar = () => {
         className="hidden md:flex items-center text-xs font-light  justify-center space-x-2 md:text-sm md:space-x-6"
         onClick={showMenuHandler}
       >
-        {userLoggedIn ? (
+        {Object.keys(user).length > 0 ? (
           <>
             <h3>
-              <Link to="/write">Create</Link>
+              <Link to="/write">Write</Link>
             </h3>
             <span
               className="cursor-pointer text-xl"
@@ -66,7 +72,7 @@ export const Navbar = () => {
           {bar ? <HiBars3 /> : <IoClose />}
         </span>
       </div>
-      <MenuBar showMenu={showMenu} userLoggedIn={userLoggedIn} />
+      <MenuBar showMenu={showMenu} />
     </div>
   );
 };

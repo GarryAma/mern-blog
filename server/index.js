@@ -11,8 +11,13 @@ import cors from "cors";
 const app = express();
 const PORT = 8080;
 
+const corsOptions = {
+  origin: "http://localhost:5174", // Ganti dengan asal front-end Anda
+  credentials: true, // Mengizinkan kredensial lintas asal
+};
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 //connection to database

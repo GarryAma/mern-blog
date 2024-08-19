@@ -3,6 +3,7 @@ import {
   createUser,
   loginUser,
   logoutUser,
+  refetch,
 } from "../controllers/authController.js";
 
 export const authRouter = express.Router();
@@ -15,3 +16,6 @@ authRouter.post("/login", loginUser);
 
 //LOGOUT
 authRouter.get("/logout", logoutUser);
+
+//REFETCH
+authRouter.get("/refetch", refetch);
