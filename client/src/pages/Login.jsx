@@ -10,14 +10,15 @@ import { CiVolumeHigh } from "react-icons/ci";
 
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const form = useForm();
   // console.log(form);
   // const result = form.register("name", { required: true });
   // console.log(result);
 
-  const result = useContext(UserContext);
-  // console.log(result.user);
+  const { handleSetUserAfterLogin } = useContext(UserContext);
+  // console.log(result);
 
   const handleLogin = async (values) => {
     try {
@@ -25,11 +26,11 @@ export const Login = () => {
         withCredentials: true,
       });
       // console.log(response.data);
-      result.handleSetUserAfterLogin(response.data);
-      console.log(response.data);
+      handleSetUserAfterLogin(response.data);
+      // console.log(response.data);
       navigate("/");
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message);
     }
   };
 
@@ -39,7 +40,7 @@ export const Login = () => {
         <h1 className="text-lg md:text-xl font-semibold text-yellow-400">
           <Link to="/">Bloggy</Link>
         </h1>
-        <h3 className="text-sm px-2 py-1 border rounded-md border-yellow-500">
+        <h3 className="text-xs px-2 py-1 border rounded-md border-yellow-500">
           <Link to="/register">Register</Link>
         </h3>
       </div>
@@ -75,7 +76,7 @@ export const Login = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter password"
                 className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
-                name="passwor"
+                name="password"
                 {...form.register("password", { required: true })}
               />
 
@@ -90,7 +91,9 @@ export const Login = () => {
                 />
               </div>
             </div>
-
+            {error && (
+              <p className="text-xs text-red-600 text-center">! {error}</p>
+            )}
             <button className="p-2 rounded-md bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200">
               Login
             </button>

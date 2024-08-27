@@ -44,7 +44,7 @@ export const loginUser = async (request, response) => {
     // console.log(queryResult);
     const token = jwt.sign(
       {
-        id: queryResult._id,
+        _id: queryResult._id,
         username: queryResult.username,
         email: queryResult.email,
       },
@@ -55,14 +55,10 @@ export const loginUser = async (request, response) => {
     );
     console.log(`token dari login : ${token}`);
     const { password: pass, ...rest } = queryResult._doc;
-    response.cookie("token", token).status(200).json(rest);
-    // console.log(pass);
-    // console.log(rest);
-    // console.log(queryResult.$__);
-    // console.log(queryResult._doc);
-
-    // response.json({ rest });
-    // response.json(queryResult);
+    response
+      .cookie("token", token)
+      .status(200)
+      .json({ message: "you are logged in successfully", data: rest });
   } catch (error) {
     console.log(error.message);
     response.status(500).json({ message: error.message });
@@ -92,7 +88,7 @@ export const refetch = (request, response) => {
     console.log("there is no token");
     return response.status(401).json({ message: "you are unauthorized" });
   }
-  console.log("Token dari refetch:", token);
+  // console.log("Token dari refetch:", token);
   jwt.verify(token, process.env.SECRET, {}, (error, data) => {
     if (error) {
       return response.status(404).json({ error });

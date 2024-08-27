@@ -11,10 +11,10 @@ import { userAuth } from "../userAuth.js";
 export const userRouter = express.Router();
 
 //update
-userRouter.put("/user/:id", verifyToken, userAuth, updateUser);
+userRouter.patch("/user/:id", verifyToken, updateUser);
 
 //delete
-userRouter.delete("/user/:id", verifyToken, userAuth, deleteUser);
+userRouter.delete("/user/:id", verifyToken, deleteUser);
 
 //get user by id
 userRouter.get("/user/:id", getuserById);

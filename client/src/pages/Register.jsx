@@ -50,7 +50,7 @@ export const Register = () => {
         <h1 className="text-lg md:text-xl font-semibold text-yellow-400">
           <Link to="/">Bloggy</Link>
         </h1>
-        <h3 className="text-sm px-2 py-1 border rounded-md border-yellow-500">
+        <h3 className="text-xs px-2 py-1 border rounded-md border-yellow-500">
           <Link to="/login">Login</Link>
         </h3>
       </div>

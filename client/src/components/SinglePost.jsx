@@ -1,37 +1,79 @@
-export const SinglePost = () => {
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../useContext/UserContext";
+import { url } from "../url";
+// import { ImageFolder } from "../url";
+
+export const SinglePost = (props) => {
+  const { user } = useContext(UserContext);
+  // console.log(user);
+
+  const {
+    category,
+    createdAt,
+    description,
+    photo,
+    title,
+    updatedAt,
+    userId,
+    username,
+    _id,
+    imageFilename,
+    imagePath,
+  } = props;
+  // console.log(imagePath);
+
+  // const formattedDate = new Date(createdAt).toLocaleString();
+  // const [date, time] = formattedDate.split(",");
+
+  const imageUrl = `${url}/${imagePath}`;
+
+  const dateObject = new Date(createdAt);
+  const options = {
+    weekday: "long", // M enambahkan nama hari
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+  const formattedDate = dateObject.toLocaleDateString("en-US", options);
+  const formattedTime = dateObject.toLocaleTimeString("en-US");
+
   return (
     <div className="w-full flex flex-col md:flex-row mt-8 md:space-x-4">
       {/* left */}
       <div className="w-full md:w-[35%] h-[250px] md:h-[400px] flex rounded-md overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1699943248190-c8eeb20f1718?q=80&w=1372&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          // src={imageUrl || photo}
+          src={props.imagePath ? imageUrl : photo}
           alt=""
-          className="w-full object-cover"
+          className="w-full h-full object-contain "
         />
       </div>
 
       {/* right */}
-      <div className="flex flex-col w-full md:w-[65%] lg:justify-evenly space-y-4">
-        <h1 className="text-xl font-bold md:mb-2 mb-1 md:text-2xl">
-          Street Photography
-        </h1>
-        <div className="flex mb-2 text-sm font-semibold text-gray-800 items-center justify-between">
-          <p>@Luke Miller</p>
+      <div className="flex flex-col w-full md:w-[65%] space-y-4">
+        <Link
+          // to={Object.keys(user).length > 0 ? `/posts/post/${_id}` : "/login"}
+          to={Object.keys(user).length > 0 ? `/posts/post/${_id}` : "/login"}
+        >
+          <h1 className="text-xl font-bold md:mb-2 mb-1 md:text-2xl">
+            {title}
+          </h1>
+        </Link>
+        <div className="flex mb-2 text-xs font-semibold text-gray-800 items-center justify-between">
+          <p>@{username}</p>
           <div className="flex md:space-x-2 space-x-1">
-            <p> November 14, 2023</p>
-            <p>16:45</p>
+            <p>{formattedDate}</p>
+            <p>{formattedTime}</p>
           </div>
         </div>
-        <p className="text-sm md:text-lg">
-          This stunning photograph captures the tranquil beauty of a sunrise
-          over a serene landscape. The scene features a picturesque horizon with
-          soft, pastel-colored skies transitioning from night to day. A gentle
-          mist hovers over a calm lake, reflecting the early morning light and
-          adding a dreamy quality to the image. The surrounding mountains and
-          lush greenery provide a natural frame, enhancing the peaceful
-          ambiance. Perfect for evoking feelings of calm and serenity, this
-          image is ideal for use in nature-themed projects, wellness materials,
-          or any setting where a sense of tranquility is desired.
+        <p className="text-sm md:text-md">
+          {description.split(" ").slice(0, 100).join(" ")}{" "}
+          <Link
+            to={Object.keys(user).length > 0 ? `/posts/post/${_id}` : "/login"}
+          >
+            <span className="text-xs text-gray-500">...read more</span>
+          </Link>
         </p>
       </div>
     </div>

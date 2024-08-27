@@ -27,6 +27,14 @@ const PostSchema = new mongoose.Schema(
     categories: {
       type: Array,
     },
+    imagePath: {
+      type: String,
+      required: false,
+    },
+    imageFilename: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true }
 );

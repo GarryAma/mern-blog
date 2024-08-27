@@ -27,7 +27,7 @@ export const UserContextProvider = ({ children }) => {
       const result = await axios.get(url + "/api/auth/refetch", {
         withCredentials: true,
       });
-      console.log(result);
+      // console.log(result);
       const { iat, exp, ...rest } = result.data;
       dispatch({
         type: "PERSIST_USER_AFTER_REFRESH",
@@ -43,6 +43,10 @@ export const UserContextProvider = ({ children }) => {
     try {
       const response = await axios.get(`${url}/api/auth/logout`, {
         withCredentials: true,
+      });
+      dispatch({
+        type: "LOGOUT",
+        payload: initialState.user,
       });
 
       navigate("/login");
