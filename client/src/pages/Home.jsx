@@ -44,8 +44,8 @@ export const Home = () => {
       <div className="w-[90%]  m-auto">
         {isLoading && <SkeletonCard />}
         {!isLoading && posts.length === 0 && <NotFound />}
-        {!isLoading && posts.length > 0 && posts.map(({ _id, ...props }) => (
-          <SinglePost key={_id} {...props}/>
+        {!isLoading && posts.length > 0 && posts.map((post) => (
+          <SinglePost key={post._id} {...post}/>
         ))}
       </div>
 
