@@ -42,19 +42,11 @@ export const Home = () => {
       <Navbar />
 
       <div className="w-[90%]  m-auto">
-        {isLoading ? (
-          <SkeletonCard />
-        ) : (
-          <>
-            {posts.length === 0 ? (
-              <NotFound />
-            ) : (
-              posts.map((singlePost) => (
-                <SinglePost {...singlePost} key={singlePost._id} />
-              ))
-            )}
-          </>
-        )}
+        {isLoading && <SkeletonCard />}
+        {!isLoading && posts.length === 0 && <NotFound />}
+        {!isLoading && posts.length > 0 && posts.map((post) => (
+          <SinglePost key={post._id} {...post}/>
+        ))}
       </div>
 
       <Footer />
